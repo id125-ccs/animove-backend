@@ -5,7 +5,7 @@ import java.util.UUID
 /**
  * Repository interface for managing the persistence of [Category] entities.
  */
-interface ICategoryRepository {
+interface CategoryRepository {
     /**
      * Returns all categories.
      */
