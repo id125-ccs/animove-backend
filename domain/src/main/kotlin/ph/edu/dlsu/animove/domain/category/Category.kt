@@ -35,4 +35,9 @@ class Category(
             require(value > 0) { "Reservation capacity must be greater than 0" }
             field = value
         }
+
+    init {
+        this.name = name
+        this.reservationCapacity = reservationCapacity
+    }
 }
