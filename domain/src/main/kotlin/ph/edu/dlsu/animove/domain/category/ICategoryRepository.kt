@@ -7,13 +7,9 @@ import java.util.UUID
  */
 interface ICategoryRepository {
     /**
-     * Persists a given category entity.
-     * If the entity already exists (based on its unique identifier), this method
-     * will update the existing record. If it does not exist, a new record is created.
-     *
-     * @param category The [Category] instance to be saved or updated.
+     * Returns all categories.
      */
-    fun save(category: Category)
+    fun findAll(): List<Category>
 
     /**
      * Retrieves a category by its unique identifier.
@@ -23,6 +19,15 @@ interface ICategoryRepository {
      * exists with the provided [id].
      */
     fun findById(id: UUID): Category?
+
+    /**
+     * Persists a given category entity.
+     * If the entity already exists (based on its unique identifier), this method
+     * will update the existing record. If it does not exist, a new record is created.
+     *
+     * @param category The [Category] instance to be saved or updated.
+     */
+    fun save(category: Category)
 
     /**
      * Deletes the category associated with the specified identifier.
