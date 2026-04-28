@@ -41,8 +41,8 @@ class Line(
  * Direction is not encoded here.
  */
 data class LineEndpoints(
-    val a: Location,
-    val b: Location
+    val a: Endpoint,
+    val b: Endpoint
 ) {
     init {
         require(a != b) { "Line endpoints must be distinct locations" }
@@ -54,15 +54,19 @@ data class LineEndpoints(
  *
  * Invariants:
  * - name must not be blank
+ * - address must not be blank
  *
- * @property name Display name of the location.
- * @property coordinate Geographic position of the location.
+ * @property name Display name of an endpoint.
+ * @property address Human-readable address of the endpoint.
+ * @property coordinate Geographic position of the endpoint.
  */
-data class Location(
+data class Endpoint(
     val name: String,
+    val address: String,
     val coordinate: Coordinate
 ) {
     init {
         require(name.isNotBlank()) { "Name must not be blank" }
+        require(address.isNotBlank()) { "Address must not be blank" }
     }
 }
