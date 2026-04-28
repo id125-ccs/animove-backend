@@ -26,6 +26,10 @@ class Line(
             require(value.isNotBlank()) { "Line name must not be blank" }
             field = value
         }
+
+    init {
+        this.name = name
+    }
 }
 
 /**
