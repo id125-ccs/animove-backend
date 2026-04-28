@@ -3,38 +3,29 @@ package ph.edu.dlsu.animove.domain.category
 import java.util.UUID
 
 /**
- * Repository interface for managing the persistence of [Category] entities.
+ * Repository for accessing and persisting [Category] entities.
  */
 interface CategoryRepository {
-    /**
-     * Returns all categories.
-     */
+
+    /** Returns all categories. */
     fun findAll(): List<Category>
 
     /**
-     * Retrieves a category by its unique identifier.
-     *
-     * @param id The [UUID] of the category to find.
-     * @return The found [Category] instance, or `null` if no category
-     * exists with the provided [id].
+     * Returns a category by its ID, or null if not found.
      */
     fun findById(id: UUID): Category?
 
     /**
-     * Persists a given category entity.
-     * If the entity already exists (based on its unique identifier), this method
-     * will update the existing record. If it does not exist, a new record is created.
+     * Saves a category.
      *
-     * @param category The [Category] instance to be saved or updated.
+     * Creates a new record or updates an existing one with the same ID.
      */
     fun save(category: Category)
 
     /**
-     * Deletes the category associated with the specified identifier.
-     * If no category is found with the given [id], the operation will
-     * complete without an exception (idempotent).
+     * Deletes a category by ID.
      *
-     * @param id The [UUID] of the category to be removed.
+     * This operation is idempotent.
      */
     fun delete(id: UUID)
 }
