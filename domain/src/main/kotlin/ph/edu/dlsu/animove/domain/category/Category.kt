@@ -13,15 +13,5 @@ import java.util.UUID
 class Category(
     val id: UUID,
     var name: Name,
-    reservationCapacity: Int
-) {
-    var reservationCapacity: Int = reservationCapacity
-        set(value) {
-            require(value > 0) { "Reservation capacity must be greater than 0" }
-            field = value
-        }
-
-    init {
-        this.reservationCapacity = reservationCapacity
-    }
-}
+    var reservationCapacity: ReservationCapacity
+)
