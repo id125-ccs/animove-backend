@@ -14,6 +14,6 @@ import java.util.UUID
 class Line(
     val id: UUID,
     var categoryId: UUID,
-    val endpoints: LineEndpoints,
     var name: Name,
+    var endpoints: LineEndpoints,
 )
