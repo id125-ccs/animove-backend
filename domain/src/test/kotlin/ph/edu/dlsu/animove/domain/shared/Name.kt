@@ -1,8 +1,8 @@
+package ph.edu.dlsu.animove.domain.shared
+
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import ph.edu.dlsu.animove.domain.shared.Name
-import ph.edu.dlsu.animove.domain.shared.domainName
 
 class NameTest : FunSpec({
     context("creation") {
