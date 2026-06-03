@@ -16,3 +16,13 @@ data class LineEndpoints(
         require(a != b) { "Line endpoints must be distinct locations" }
     }
 }
+
+/**
+ * Represents the travel direction of a line relative to its endpoints.
+ *
+ * A direction indicates whether a trip operates from endpoint A to
+ * endpoint B or from endpoint B to endpoint A.
+ */
+enum class Direction {
+    A_TO_B, B_TO_A
+}
