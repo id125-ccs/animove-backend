@@ -24,7 +24,7 @@ value class Name private constructor(val value: String) {
         fun create(raw: String): Name {
             val normalized = raw.trim()
 
-            normalized.validate("Name") {
+            normalized.validate {
                 notBlank()
                 maxLength(MAX_LENGTH)
             }
