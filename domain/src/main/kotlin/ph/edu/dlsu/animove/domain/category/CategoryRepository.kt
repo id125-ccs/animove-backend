@@ -6,10 +6,6 @@ import java.util.UUID
  * Repository for accessing and persisting [Category] entities.
  */
 interface CategoryRepository {
-
-    /** Returns all categories. */
-    fun findAll(): List<Category>
-
     /**
      * Returns a category by its ID, or null if not found.
      */
