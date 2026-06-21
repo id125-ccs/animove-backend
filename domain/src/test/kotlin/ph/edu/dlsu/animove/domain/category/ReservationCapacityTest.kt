@@ -22,7 +22,7 @@ class ReservationCapacityTest : FunSpec({
         }
 
         test("should throw when value is less than minimum") {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<ReservationCapacityTooLow> {
                 ReservationCapacity(
                     ReservationCapacity.MINIMUM_RESERVATION_CAPACITY - 1
                 )
