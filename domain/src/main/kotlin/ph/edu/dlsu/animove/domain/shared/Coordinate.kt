@@ -1,5 +1,17 @@
 package ph.edu.dlsu.animove.domain.shared
 
+import ph.edu.dlsu.animove.domain.error.ValidationError
+import ph.edu.dlsu.animove.domain.shared.Coordinate.Companion.MAXIMUM_LATITUDE
+import ph.edu.dlsu.animove.domain.shared.Coordinate.Companion.MINIMUM_LATITUDE
+import ph.edu.dlsu.animove.domain.shared.Coordinate.Companion.MAXIMUM_LONGITUDE
+import ph.edu.dlsu.animove.domain.shared.Coordinate.Companion.MINIMUM_LONGITUDE
+
+class LatitudeOutOfBounds :
+    ValidationError("Latitude must be between $MINIMUM_LATITUDE and $MAXIMUM_LATITUDE")
+
+class LongitudeOutOfBounds :
+    ValidationError("Longitude must be between $MINIMUM_LONGITUDE and $MAXIMUM_LONGITUDE")
+
 /**
  * Represents a geographic coordinate on Earth.
  *
@@ -22,11 +34,10 @@ data class Coordinate(
     }
 
     init {
-        require(latitude in MINIMUM_LATITUDE..MAXIMUM_LATITUDE) {
-            "Latitude must be between $MINIMUM_LATITUDE and $MAXIMUM_LATITUDE"
-        }
-        require(longitude in MINIMUM_LONGITUDE..MAXIMUM_LONGITUDE) {
-            "Longitude must be between $MINIMUM_LONGITUDE and $MAXIMUM_LONGITUDE"
-        }
+        if (latitude !in MINIMUM_LATITUDE..MAXIMUM_LATITUDE)
+            throw LatitudeOutOfBounds()
+
+        if (longitude !in MINIMUM_LONGITUDE..MAXIMUM_LONGITUDE)
+            throw LongitudeOutOfBounds()
     }
 }

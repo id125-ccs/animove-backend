@@ -37,7 +37,7 @@ class CoordinateTest : FunSpec({
         }
 
         test("should throw when latitude is below minimum") {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<LatitudeOutOfBounds> {
                 Coordinate(
                     latitude = Coordinate.MINIMUM_LATITUDE - 0.1,
                     longitude = 0.0
@@ -49,7 +49,7 @@ class CoordinateTest : FunSpec({
         }
 
         test("should throw when latitude is above maximum") {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<LatitudeOutOfBounds> {
                 Coordinate(
                     latitude = Coordinate.MAXIMUM_LATITUDE + 0.1,
                     longitude = 0.0
@@ -61,7 +61,7 @@ class CoordinateTest : FunSpec({
         }
 
         test("should throw when longitude is below minimum") {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<LongitudeOutOfBounds> {
                 Coordinate(
                     latitude = 0.0,
                     longitude = Coordinate.MINIMUM_LONGITUDE - 0.1
@@ -73,7 +73,7 @@ class CoordinateTest : FunSpec({
         }
 
         test("should throw when longitude is above maximum") {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<LongitudeOutOfBounds> {
                 Coordinate(
                     latitude = 0.0,
                     longitude = Coordinate.MAXIMUM_LONGITUDE + 0.1
