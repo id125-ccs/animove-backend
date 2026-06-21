@@ -1,37 +1,25 @@
 package ph.edu.dlsu.animove.domain.extensions
 
-sealed interface StringValidationResult {
-    data object Success : StringValidationResult
+import ph.edu.dlsu.animove.domain.error.ValidationError
 
-    sealed interface Failure : StringValidationResult {
-        data object Blank : Failure
-        data class ExceedsMaxLength(val max: Int) : Failure
-    }
-}
+class StringBlank : ValidationError("String must not be blank")
+class StringExceedMaxLength(maxLength: Int) : ValidationError("String must not exceed $maxLength characters")
 
 class StringValidationScope(
     private val value: String
 ) {
-    private val results = mutableListOf<StringValidationResult>()
-
     fun notBlank() {
-        if (value.isBlank()) {
-            results += StringValidationResult.Failure.Blank
-        }
+        if (value.isBlank())
+            throw StringBlank()
     }
 
-    fun maxLength(max: Int) {
-        if (value.length > max) {
-            results += StringValidationResult.Failure.ExceedsMaxLength(max)
-        }
+    fun maxLength(
+        max: Int,
+    ) {
+        if (value.length > max) throw StringExceedMaxLength(max)
     }
-
-    fun result(): StringValidationResult =
-        results.firstOrNull { it is StringValidationResult.Failure }
-            ?: StringValidationResult.Success
 }
 
 internal fun String.validate(
     block: StringValidationScope.() -> Unit
-): StringValidationResult =
-    StringValidationScope(this).apply(block).result()
+) = StringValidationScope(this).block()

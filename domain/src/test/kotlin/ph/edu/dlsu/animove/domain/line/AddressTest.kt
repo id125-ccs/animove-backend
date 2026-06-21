@@ -3,6 +3,8 @@ package ph.edu.dlsu.animove.domain.line
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import ph.edu.dlsu.animove.domain.extensions.StringBlank
+import ph.edu.dlsu.animove.domain.extensions.StringExceedMaxLength
 
 class AddressTest : FunSpec({
     context("creation") {
@@ -19,19 +21,19 @@ class AddressTest : FunSpec({
         }
 
         test("should throw when address is blank") {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<StringBlank> {
                 "   ".domainAddress
             }
 
-            exception.message shouldBe "Address must not be blank"
+            exception.message shouldBe "String must not be blank"
         }
 
         test("should throw when address exceeds maximum length") {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<StringExceedMaxLength> {
                 "a".repeat(128).domainAddress
             }
 
-            exception.message shouldBe "Address must not exceed 127 characters"
+            exception.message shouldBe "String must not exceed 127 characters"
         }
 
         test("should allow address at maximum length") {
