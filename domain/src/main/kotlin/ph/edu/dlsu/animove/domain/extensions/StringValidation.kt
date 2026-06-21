@@ -20,6 +20,21 @@ class StringValidationScope(
     }
 }
 
+/**
+ * Validates a string using the provided validation rules.
+ *
+ * Example:
+ * ```
+ * name.validate("name") {
+ *     notBlank()
+ *     maxLength(50)
+ * }
+ * ```
+ *
+ * @throws StringBlank if the string is blank and [StringValidationScope.notBlank] is used.
+ * @throws StringExceedMaxLength if the string exceeds the specified maximum
+ * length and [StringValidationScope.maxLength] is used.
+ */
 internal fun String.validate(
     block: StringValidationScope.() -> Unit
 ) = StringValidationScope(this).block()
