@@ -21,7 +21,7 @@ class LineEndpointsTest : FunSpec({
         test("should throw when locations are identical") {
             val endpoint = Endpoint("Manila".domainName, "Manila".domainAddress, Coordinate(0.0, 0.0))
 
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<IdenticalLineEndpoints> {
                 LineEndpoints(
                     a = endpoint,
                     b = endpoint

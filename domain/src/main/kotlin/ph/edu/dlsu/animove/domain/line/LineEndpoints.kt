@@ -1,5 +1,9 @@
 package ph.edu.dlsu.animove.domain.line
 
+import ph.edu.dlsu.animove.domain.error.ValidationError
+
+class IdenticalLineEndpoints: ValidationError("Line endpoints must be distinct locations")
+
 /**
  * Represents the two terminal locations of a line.
  *
@@ -7,13 +11,16 @@ package ph.edu.dlsu.animove.domain.line
  * - a and b must be distinct locations
  *
  * Direction is not encoded here.
+ *
+ * @throws IdenticalLineEndpoints if [a] and [b] refer to the same [Endpoint].
  */
 data class LineEndpoints(
     val a: Endpoint,
     val b: Endpoint
 ) {
     init {
-        require(a != b) { "Line endpoints must be distinct locations" }
+        if (a == b)
+            throw IdenticalLineEndpoints()
     }
 }
 
