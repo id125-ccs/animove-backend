@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "animove-backend"
 include("domain")
+include("application")
