@@ -1,5 +1,6 @@
 package ph.edu.dlsu.animove.domain.category
 
+import ph.edu.dlsu.animove.domain.shared.Name
 import java.util.UUID
 
 /**
@@ -10,6 +11,11 @@ interface CategoryRepository {
      * Returns a category by its ID, or null if not found.
      */
     fun findById(id: UUID): Category?
+
+    /**
+     * Returns the category with the given [name], or null if none exists.
+     */
+    fun findByName(name: Name): Category?
 
     /**
      * Saves a category.

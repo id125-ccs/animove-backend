@@ -11,6 +11,8 @@ import java.util.UUID
 sealed interface CreateCategoryResult {
     data class Success(val id: UUID) : CreateCategoryResult
 
+    object DuplicateName : CreateCategoryResult
+
     data class ValidationFailed(val error: DomainError) : CreateCategoryResult
 
     data class InternalError(val cause: Throwable) : CreateCategoryResult
@@ -19,9 +21,13 @@ sealed interface CreateCategoryResult {
 class CreateCategoryHandler(private val categoryRepository: CategoryRepository, private val nextId: () -> UUID) {
     fun handle(command: CreateCategoryCommand): CreateCategoryResult {
         return try {
-            val category = Category(
-                nextId(), Name.create(command.name), ReservationCapacity(command.reservationCapacity)
-            )
+            val name = Name.create(command.name)
+            val reservationCapacity = ReservationCapacity(command.reservationCapacity)
+
+            if (categoryRepository.findByName(name) != null)
+                return CreateCategoryResult.DuplicateName
+
+            val category = Category(nextId(), name, reservationCapacity)
 
             categoryRepository.save(category)
 
