@@ -10,6 +10,8 @@ sealed interface RenameCategoryResult {
 
     object NotFound : RenameCategoryResult
 
+    object NameAlreadyTaken : RenameCategoryResult
+
     data class ValidationFailed(val error: DomainError) : RenameCategoryResult
 
     data class InternalError(val cause: Throwable) : RenameCategoryResult
@@ -21,7 +23,12 @@ class RenameCategoryHandler(
     fun handle(command: RenameCategoryCommand): RenameCategoryResult = try {
         val category = categoryRepository.findById(command.categoryId) ?: return RenameCategoryResult.NotFound
 
-        category.name = Name.create(command.newName)
+        val newName = Name.create(command.newName)
+
+        if (categoryRepository.existsByName(newName))
+            return RenameCategoryResult.NameAlreadyTaken
+
+        category.name = newName
 
         categoryRepository.save(category)
 
