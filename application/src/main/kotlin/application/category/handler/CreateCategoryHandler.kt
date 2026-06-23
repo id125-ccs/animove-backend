@@ -24,7 +24,7 @@ class CreateCategoryHandler(private val categoryRepository: CategoryRepository, 
             val name = Name.create(command.name)
             val reservationCapacity = ReservationCapacity(command.reservationCapacity)
 
-            if (categoryRepository.findByName(name) != null)
+            if (categoryRepository.existsByName(name))
                 return CreateCategoryResult.DuplicateName
 
             val category = Category(nextId(), name, reservationCapacity)
