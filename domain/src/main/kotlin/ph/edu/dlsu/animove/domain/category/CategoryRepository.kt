@@ -13,9 +13,9 @@ interface CategoryRepository {
     fun findById(id: UUID): Category?
 
     /**
-     * Returns the category with the given [name], or null if none exists.
+     * Returns true if a category with the given [name] exists, or false if not.
      */
-    fun findByName(name: Name): Category?
+    fun existsByName(name: Name): Boolean
 
     /**
      * Saves a category.
